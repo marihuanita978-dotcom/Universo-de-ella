@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Amor 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ff4e8a,#ff99c8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* Pantalla contraseña */
+.lock-screen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#ff4e8a;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    z-index:10;
+}
+
+.lock-screen input{
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    margin:10px;
+    font-size:16px;
+    text-align:center;
+}
+
+.lock-screen button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:white;
+    color:#ff4e8a;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Carta */
+.card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    width:90%;
+    max-width:500px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+    color:#ff4e8a;
+}
+
+#contador{
+    margin-top:20px;
+    font-weight:bold;
+    color:#ff4e8a;
+}
+
+/* Corazones */
+.heart{
+    position:absolute;
+    color:red;
+    animation: float 6s linear infinite;
+    font-size:20px;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+</style>
+</head>
+<body>
+
+<!-- Pantalla de contraseña -->
+<div class="lock-screen" id="lock">
+    <h2>💖 Ingresa nuestra fecha especial 💖</h2>
+    <p>(Formato: 05112022)</p>
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="checkPassword()">Entrar</button>
+</div>
+
+<!-- Contenido principal -->
+<div class="card">
+    <h1>Para el amor de mi vida 💕</h1>
+    <p>
+        Si pudiera elegir un lugar seguro, sería a tu lado.<br><br>
+        Desde que nos hicimos novios mi vida cambió completamente.<br>
+        Cada día contigo es mi lugar favorito en el mundo.<br><br>
+        Te amo más de lo que las palabras pueden explicar.
+    </p>
+
+    <div id="contador"></div>
+
+    <!-- Música -->
+    <div style="margin-top:20px;">
+        <iframe width="0" height="0" 
+        src="https://www.youtube.com/embed/0uH-6pZp4G4?autoplay=1&loop=1&playlist=0uH-6pZp4G4"
+        frameborder="0"
+        allow="autoplay">
+        </iframe>
+    </div>
+</div>
+
+<script>
+// Contraseña
+function checkPassword(){
+    const pass = document.getElementById("password").value;
+    if(pass === "05112022"){
+        document.getElementById("lock").style.display="none";
+    }else{
+        alert("Esa no es nuestra fecha 💔");
+    }
+}
+
+// Contador desde 5 noviembre 2022
+const startDate = new Date("2022-11-05T00:00:00");
+
+function updateCounter(){
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("contador").innerHTML =
+        `Mi amor por ti comenzó hace... 💖<br>
+        ${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+}
+
+setInterval(updateCounter,1000);
+
+// Corazones flotando
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},6000);
+}
+
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
